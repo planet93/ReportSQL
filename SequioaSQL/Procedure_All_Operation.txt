@@ -1,0 +1,39 @@
+ALTER PROCEDURE [dbo].[all_operation]
+AS
+BEGIN
+  UPDATE mSR
+			SET mSR.EstimSum=mSE.EstimSum,
+	        mSR.FactSum=mSE.FactSum,
+	        mSR.TargetSum=mSE.TargetSum
+	FROM Sequoia.dbo.Estimate AS mSE,
+	SequoiaReport.dbo.Estimate AS mSR
+	WHERE mSR.SequoiaKaId=mSE.Id AND (
+      mSR.EstimSum != mSE.EstimSum OR
+      mSR.FactSum != mSE.FactSum OR
+      mSR.TargetSum != mSE.TargetSum)
+END
+
+BEGIN
+	INSERT INTO SequoiaReport.dbo.Estimate
+      ([SequoiaKaId],
+      [EstimSum],
+      [TargetSum],
+      [FactSum])
+  SELECT mSE.Id,
+      mSE.EstimSum,
+      mSE.TargetSum,
+      mSE.FactSum
+  FROM Sequoia.dbo.Estimate AS mSE
+  WHERE NOT EXISTS (
+  SELECT 1
+  FROM SequoiaReport.dbo.Estimate AS mSR
+  WHERE mSE.Id=mSR.SequoiaKaId)
+END
+
+BEGIN
+	DELETE mSR
+  FROM SequoiaReport.dbo.Estimate AS mSR
+  WHERE mSR.SequoiaKaId NOT IN (
+  SELECT mSE.Id
+  FROM Sequoia.dbo.Estimate AS mSE)
+END

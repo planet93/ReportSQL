@@ -43,9 +43,11 @@ namespace SequoiaReport
                 ddmCreate.ExecuteQuery();
             }
 
-            DeleteEstimate(connectionStringSequioaReport);
-            InsertIntoEstimate(connectionStringSequioaReport);
-            UpdateEstimate(connectionStringSequioaReport);
+            //DeleteEstimate(connectionStringSequioaReport);
+            //InsertIntoEstimate(connectionStringSequioaReport);
+            //UpdateEstimate(connectionStringSequioaReport);
+
+            AllOperatin(connectionStringSequioaReport);
 
             //Console.ReadKey();
 
@@ -134,6 +136,13 @@ namespace SequoiaReport
                                 COMMIT;";
             DirectDataManager ddmCreate = new DirectDataManager(sql, connectionString);
             ddmCreate.ExecuteQuery();
+        }
+
+        public static void AllOperatin(string connectionString)
+        {
+            string sql = $@"EXEC all_operation";
+            DirectDataManager ddmAll = new DirectDataManager(sql, connectionString);
+            ddmAll.ExecuteQuery();
         }
     }
 }
