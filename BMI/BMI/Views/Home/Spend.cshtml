@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Spend";
+}
+
+<div >
+    <div id="layoutSidenav">
+
+        <div id="layoutSidenav_nav" class="spend-first">
+            @*<ul>
+                <li v-for="item in treeData">
+                    <div class="title-spend">
+                        <span v-show="!item.isOpen" class="material-icons my-icon">chevron_right</span>
+                        <span v-show="item.isOpen" class="material-icons my-icon">expand_more</span>
+                        <div @@click="toggleSpend(item)" v-bind:class="{'li-bold':item.isFolder, 'title-open':item.isOpen}">
+                            {{item.name}}
+                        </div>
+                    </div>                    
+                    <ul v-show="item.isOpen" v-if="item.isFolder">
+                        <li v-for="item2 in item.children">
+                            <div class="title-spend">
+                                <span v-show="!item2.isOpen" class="material-icons my-icon">chevron_right</span>
+                                <span v-show="item2.isOpen" class="material-icons my-icon">expand_more</span>
+                                <div v-bind:class="[boldClass]"
+                                     @@click="toggleSpend(item2)">
+
+                                    {{item2.name}}
+                                </div>
+                            </div>
+                            <ul v-show="item2.isOpen" v-if="item2.isFolder">
+                                <li v-for="item3 in item2.children">
+                                    <div @@click="toggleSpend(item3)">
+                                        {{item3.name}}
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>*@
+
+            <ul>
+                <li v-for="spend1 in spends">
+                    <div class="title-spend">
+                        <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
+                        <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
+                        <div @@click="toggleSpend(spend1)" v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}">
+                            {{spend1.Name}}
+                        </div>
+                    </div>
+
+                    <ul v-show="spend1.IsOpen">
+                        <li v-for="spend2 in spend1.SubSpend">
+                            <div class="title-spend">
+                                <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
+                                <div @@click="toggleSpend(spend2)" v-bind:class="{'li-bold':spend2.IsFolder, 'title-open':spend2.IsOpen}">
+                                    {{spend2.Name}}
+                                </div>
+                            </div>
+
+                            <ul v-show="spend2.IsOpen">
+                                <li v-for="spend3 in spend2.SubSpend">
+                                    <div class="title-spend">
+                                        <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                        <span v-show="spend3.IsOpen" class="material-icons my-icon">expand_more</span>
+                                        <div @@click="toggleSpend(spend3)" v-bind:class="{'li-bold':spend3.IsFolder, 'title-open':spend3.IsOpen}">
+                                            {{spend3.Name}}
+                                        </div>
+                                    </div>
+
+                                    <ul v-show="spend3.IsOpen">
+                                        <li v-for="spend4 in spend3.SubSpend">
+                                            <div class="title-spend">
+                                                <span v-show="!spend4.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                                <span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>
+                                                <div @@click="toggleSpend(spend4)" v-bind:class="{'li-bold':spend4.IsFolder, 'title-open':spend4.IsOpen}">
+                                                    {{spend3.Name}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="layoutSidenav_content" style="background-color:lightgrey">
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Dashboard</h1>
+                </div>
+            </main>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        var treeDataDef = [{
+            name: "Advertising",
+            children: [
+                {
+                    name: "Advertising Consumer",
+                    children: [
+                        {
+                            name: "Asset deployment",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        },
+                        { name: "Assets Creation" },
+                        { name: "Public Relations" },
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        }
+                    ]
+                },
+                { name: "Advertising trade" },
+                {
+                    name: "SM Advertising trade",
+                    children: [
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        },
+                        { name: "hello" },
+                        { name: "wat" },
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        }
+                    ]
+                },
+            ],
+            isFolder: true,
+            isOpen: false,
+        },
+        {
+            name: "My Tree2",
+            children: [
+                {
+                    name: "hello spend",
+                    children: [
+                        { name: "spend3.1 asf asdasf" },
+                        { name: "spend3.2 assd sadas d" },
+                    ],
+                    isFolder: true,
+                    isOpen: false,
+                },
+                { name: "wat" }],
+            isFolder: true,
+            isOpen: false,
+        }
+        ];
+        
+        var testApp = new Vue({
+            el: "#globalSection",
+            data: {
+                title: "Test",
+                treeData: treeDataDef,
+                boldClass: "li-bold",
+                openClass: "title-open",
+
+                spends: [],
+
+            },
+            methods: {
+                toggleSpend(item) {
+                    item.IsOpen = !item.IsOpen;
+                    //if ( item.isFolder) {
+                    //    item.isOpen = !item.isOpen;
+                    //}
+                },
+                loadSpend() {
+                    axios.post("/Home/GetSpends", null).then(resp => {
+                        console.log(resp.data);
+                        this.spends = resp.data;
+                    });
+                }
+            },
+            mounted() {
+                this.loadSpend();
+            }
+        });
+
+        
+
+    </script>
+    }

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "SpendTwo";
+}
+
+<h2>SpendTwo</h2>
+
+@section scripts{
+    <script type="text/javascript">       
+
+        var testApp = new Vue({
+            el: "#globalSection",
+            data: {
+                title: "Test",
+
+                spends: [],
+
+            },
+            methods: {
+                toggleSpend(item) {
+                    item.IsOpen = !item.IsOpen;
+                    //if ( item.isFolder) {
+                    //    item.isOpen = !item.isOpen;
+                    //}
+                },
+                loadSpend() {
+                    axios.post("/Home/GetSpends", null).then(resp => {
+                        console.log(resp.data);
+                        this.spends = resp.data;
+                    });
+                }
+            },
+            mounted() {
+                this.loadSpend();
+            }
+        });
+
+
+
+    </script>
+}

@@ -1,0 +1,69 @@
+﻿<div class="container">
+    <div class="row mt-3">
+        <div class="col-2">
+            <select class="form-control form-control-sm" v-model="selectdata">
+                <option v-for="item in typeLoad" v-bind:value="item">
+                    {{item}}
+                </option>
+            </select>
+        </div>
+        <div class="col-3">
+            <input type="file" id="file" name="file" />
+        </div>
+        <div class="col-2">
+            <button class="btn btn-sm btn-outline-success" @@click="uploadSelectedFile">Загрузить</button>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        var auditApp = new Vue({
+            el: "#globalSection",
+            data: {
+                typeLoad: ["ClassifierType", "Spends"],
+
+                selectdata: "",
+            },
+            methods: {
+                uploadSelectedFile() {
+                    var data = this.collectData("#file");
+                    if (this.check()) {
+                        axios.post("/Home/PostMasterData", data, { headers: { 'Content-Type': "multipart/form-data" } }).then(resp => {
+                            console.log(resp.data.Message);
+                            console.log(resp.data.ErrorMessage);
+                            if (resp.data.LineError == null || resp.data.LineError == undefined) {
+
+                            }
+                            else {
+                                for (let i = 0; i < resp.data.LineError.length; i++) {
+                                    console.log(resp.data.LineError[i]);
+                                }
+                            }
+                        });
+                    }
+                },
+                collectData(selector) {
+                    const formData = new FormData();
+                    const imagefile = document.querySelector(selector);
+                    this.existfile = imagefile.files.length;
+                    formData.append('file', imagefile.files[0]);
+                    formData.append('type', this.selectdata);
+                    return formData;
+                },
+                check() {
+                    if (this.existfile === 0) {
+                        alert('Change file!');
+                        return false;
+                    }
+                    return true;
+                },
+            },
+            mounted() {
+            }
+        });
+
+    </script>
+}
