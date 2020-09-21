@@ -42,25 +42,25 @@
 
             <ul>
                 <li v-for="spend1 in spends">
-                    <div class="title-spend">
+                    <div class="cursor-pointer spend1-title" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
                         <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
                         <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
-                        <div @@click="toggleSpend(spend1)" v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}">
+                        <div @@click="toggleSpend(spend1)" class="bold-title" @*v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}"*@>
                             {{spend1.Name}}
                         </div>
                     </div>
 
-                    <ul v-show="spend1.IsOpen">
+                    <ul v-show="spend1.IsOpen" class="nested">
                         <li v-for="spend2 in spend1.SubSpend">
-                            <div class="title-spend">
+                            <div class="cursor-pointer spend2-title" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
                                 <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
                                 <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
-                                <div @@click="toggleSpend(spend2)" v-bind:class="{'li-bold':spend2.IsFolder, 'title-open':spend2.IsOpen}">
+                                <div @@click="toggleSpend(spend2)" style="font-weight:500">
                                     {{spend2.Name}}
                                 </div>
                             </div>
 
-                            <ul v-show="spend2.IsOpen">
+                            <ul v-show="spend2.IsOpen" class="nested">
                                 <li v-for="spend3 in spend2.SubSpend">
                                     <div class="title-spend">
                                         <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
@@ -70,13 +70,13 @@
                                         </div>
                                     </div>
 
-                                    <ul v-show="spend3.IsOpen">
+                                    <ul v-show="spend3.IsOpen" class="nested">
                                         <li v-for="spend4 in spend3.SubSpend">
                                             <div class="title-spend">
                                                 <span v-show="!spend4.IsOpen" class="material-icons my-icon">chevron_right</span>
                                                 <span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>
                                                 <div @@click="toggleSpend(spend4)" v-bind:class="{'li-bold':spend4.IsFolder, 'title-open':spend4.IsOpen}">
-                                                    {{spend3.Name}}
+                                                    {{spend4.Name}}
                                                 </div>
                                             </div>
                                         </li>

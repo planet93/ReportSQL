@@ -56,7 +56,8 @@ namespace BMI.Controllers
 
         public JsonResult GetSpends()
         {
-            var res = mSs.GetSpends();
+            //var res = mSs.GetSpends();
+            var res = mSs.GetSpendsFast();
             return Json(res);
         }
 
