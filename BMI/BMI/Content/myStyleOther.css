@@ -1,2 +1,40 @@
 ﻿body {
 }
+.ul-other {
+
+    padding: 0;
+}
+.ul-other li {
+    border: none;
+    background-color: inherit;
+    white-space: nowrap;
+    list-style-type: none;
+}
+.layoutSidenav_content-other {
+    margin-left: 200px;
+    width: -webkit-fill-available;
+    background-color: transparent;
+    position: absolute;
+    top: 52px;
+    bottom: 0;
+}
+.spend-first-other {
+    width: 200px;
+    min-width: 200px;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    background-color: #eaeaea;
+    display: flex;
+    overflow-x: auto;
+}
+.resize {
+    position: absolute;
+    left: 0px;
+    width: 5px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    cursor: e-resize;
+}

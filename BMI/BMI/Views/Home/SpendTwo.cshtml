@@ -3,18 +3,143 @@
     ViewBag.Title = "SpendTwo";
 }
 
-<h2>SpendTwo</h2>
+<div >
+    <div id="layoutSidenav-other">
+        <div id="layoutSidenav_nav-other" class="spend-first-other">
+            <ul class="ul-other">
+                <li v-for="spend1 in spends">
+                    <div class="title-spend">
+                        <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
+                        <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
+                        <div @@click="toggleSpend(spend1)" v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}">
+                            {{spend1.Name}}
+                        </div>
+                    </div>
+
+                    <ul v-show="spend1.IsOpen">
+                        <li v-for="spend2 in spend1.SubSpend">
+                            <div class="title-spend">
+                                <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
+                                <div @@click="toggleSpend(spend2)" v-bind:class="{'li-bold':spend2.IsFolder, 'title-open':spend2.IsOpen}">
+                                    {{spend2.Name}}
+                                </div>
+                            </div>
+
+                            <ul v-show="spend2.IsOpen">
+                                <li v-for="spend3 in spend2.SubSpend">
+                                    <div class="title-spend">
+                                        <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                        <span v-show="spend3.IsOpen" class="material-icons my-icon">expand_more</span>
+                                        <div @@click="toggleSpend(spend3)" v-bind:class="{'li-bold':spend3.IsFolder, 'title-open':spend3.IsOpen}">
+                                            {{spend3.Name}}
+                                        </div>
+                                    </div>
+
+                                    <ul v-show="spend3.IsOpen">
+                                        <li v-for="spend4 in spend3.SubSpend">
+                                            <div class="title-spend">
+                                                <span v-show="!spend4.IsOpen" class="material-icons my-icon">chevron_right</span>
+                                                <span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>
+                                                <div @@click="toggleSpend(spend4)" v-bind:class="{'li-bold':spend4.IsFolder, 'title-open':spend4.IsOpen}">
+                                                    {{spend3.Name}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="layoutSidenav_content-other" class="layoutSidenav_content-other" style="background-color:lightgrey">
+            <div id="resize" class="resize"></div>
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Dashboard</h1>
+                </div>
+            </main>
+        </div>
+
+    </div>
+</div>
 
 
-<h1>HI</h1>
 
 @section scripts{
-    <script type="text/javascript">       
+    <script type="text/javascript">
 
+        var treeDataDef = [{
+            name: "Advertising",
+            children: [
+                {
+                    name: "Advertising Consumer",
+                    children: [
+                        {
+                            name: "Asset deployment",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        },
+                        { name: "Assets Creation" },
+                        { name: "Public Relations" },
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        }
+                    ]
+                },
+                { name: "Advertising trade" },
+                {
+                    name: "SM Advertising trade",
+                    children: [
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        },
+                        { name: "hello" },
+                        { name: "wat" },
+                        {
+                            name: "child folder",
+                            children: [{ name: "hello" }, { name: "wat" }]
+                        }
+                    ]
+                },
+            ],
+            isFolder: true,
+            isOpen: false,
+        },
+        {
+            name: "My Tree2",
+            children: [
+                {
+                    name: "hello spend",
+                    children: [
+                        { name: "spend3.1 asf asdasf" },
+                        { name: "spend3.2 assd sadas d" },
+                    ],
+                    isFolder: true,
+                    isOpen: false,
+                },
+                { name: "wat" }],
+            isFolder: true,
+            isOpen: false,
+        }
+        ];
+        
         var testApp = new Vue({
             el: "#globalSection",
             data: {
                 title: "Test",
+                treeData: treeDataDef,
+                boldClass: "li-bold",
+                openClass: "title-open",
 
                 spends: [],
 
@@ -38,7 +163,48 @@
             }
         });
 
+        $(document).ready(function () {
+            var p = $(".spend-first-other");
+            var d = $(".layoutSidenav_content-other");
+            var r = $(".resize");
 
+            var curr_width = p.width()
+            var unlock = false;
+
+            $(document).mousemove(function (e) {
+                var change = curr_width + (e.clientX - curr_width);
+
+                if (unlock) {
+                    if (change > 199) {
+                        $("#debug").text(e.clientX + " resize");
+                        p.css("width", change);
+                        d.css("margin-left", change);
+                    }
+                    else {
+                        p.css("width", 200);
+                        d.css("margin-left", 200);
+                    }
+                }
+            });
+
+            r.mousedown(function (e) {
+                curr_width = p.width();
+                unlock = true;
+                r.css("background-color", "rgba(0, 0, 0, 0.2)");
+            });
+
+            $(document).mousedown(function (e) {
+                if (unlock) {
+                    e.preventDefault();
+                }
+            });
+
+            $(document).mouseup(function (e) {
+                unlock = false;
+                $("#debug").text("");
+                r.css("background-color", "rgba(0, 0, 0, 0.1)");
+            });
+        });
 
     </script>
-}
+    }
