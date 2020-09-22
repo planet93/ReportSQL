@@ -1,7 +1,7 @@
 ﻿body {
 }
 .ul-other {
-
+    width: -webkit-fill-available;
     padding: 0;
 }
 .ul-other li {
