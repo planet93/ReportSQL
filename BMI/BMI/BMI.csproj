@@ -156,6 +156,8 @@
     <Compile Include="Services\ExcelDataReader\IExcelToDataSet.cs" />
     <Compile Include="Services\LoadDataServices.cs" />
     <Compile Include="Services\SpendServices.cs" />
+    <Compile Include="Services\Util\DirectDataManager.cs" />
+    <Compile Include="Services\Util\DirectDataManagerConnection.cs" />
     <Compile Include="Services\Util\IO.cs" />
     <Compile Include="Services\Util\RandomGenerator.cs" />
   </ItemGroup>
