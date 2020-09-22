@@ -42,40 +42,40 @@
 
             <ul class="pl-1">
                 <li v-for="spend1 in spends">
-                    <div class="font-size-treeview cursor-pointer spend1-title mt-1" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
+                    <div @@click="toggleSpend(spend1)" class="font-size-treeview cursor-pointer spend1-title mt-1" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
                         <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
                         <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
-                        <div @@click="toggleSpend(spend1)" class="bold-title" @*v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}"*@>
+                        <div class="bold-title" @*v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}"*@>
                             {{spend1.Name}}
                         </div>
                     </div>
 
                     <ul v-show="spend1.IsOpen" class="nested">
                         <li v-for="spend2 in spend1.SubSpend" class="pl-2">
-                            <div class="font-size-treeview cursor-pointer spend2-title mt-1" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
+                            <div @@click="toggleSpend(spend2)" class="font-size-treeview cursor-pointer spend2-title mt-1" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
                                 <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
                                 <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
-                                <div @@click="toggleSpend(spend2)" style="font-weight:500">
+                                <div style="font-weight:500">
                                     {{spend2.Name}}
                                 </div>
                             </div>
 
                             <ul v-show="spend2.IsOpen" class="nested">
                                 <li v-for="spend3 in spend2.SubSpend" class="pl-2">
-                                    <div class="font-size-treeview cursor-pointer spend3-title mt-1" v-bind:class="{'spend3-title-open':spend3.IsOpen}">
+                                    <div @@click="toggleSpend(spend3)" class="font-size-treeview cursor-pointer spend3-title mt-1" v-bind:class="{'spend3-title-open':spend3.IsOpen}">
                                         <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
                                         <span v-show="spend3.IsOpen" class="material-icons my-icon">expand_more</span>
-                                        <div @@click="toggleSpend(spend3)">
+                                        <div>
                                             {{spend3.Name}}
                                         </div>
                                     </div>
 
                                     <ul v-show="spend3.IsOpen" class="nested">
                                         <li v-for="spend4 in spend3.SubSpend" class="pl-2">
-                                            <div class="font-size-treeview cursor-pointer spend4-title mt-1" v-bind:class="{'spend4-title-open':spend4.IsOpen}">
+                                            <div @@click="toggleSpend(spend4)" class="font-size-treeview cursor-pointer spend4-title mt-1" v-bind:class="{'spend4-title-open':spend4.IsOpen}">
                                                 <span @*v-show="!spend4.IsOpen"*@ class="material-icons my-icon">chevron_right</span>
                                                 @*<span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>*@
-                                                <div @@click="toggleSpend(spend4)">
+                                                <div>
                                                     {{spend4.Name}}
                                                 </div>
                                             </div>
@@ -179,26 +179,16 @@
             $(document).mousemove(function (e) {
                 var nav_change = nav_width + (e.clientX - nav_width);
                 var content_change = overall_width - nav_change;
-                console.log("SHIRINA VSYA: " + content_change);
 
                 if (unlock) {
 
-                    console.log("nav_width = " + nav_width);
-                    console.log("e.clientX = " + e.clientX);
-                    console.log("change = " + nav_change);
-
                     if (nav_change > 200) {
-                        $("#debug").text(e.clientX + " resize");
-                        
                         p.css("width", nav_change);
                         d.css("width", content_change);
-                        //d.css("margin-left", change - 200);
                     }
                     else {
-                        console.log("123344")
                         p.css("width", 200);
                         d.css("width", overall_width);
-                        //d.css("margin-left", 0);
                     }
                 }
             });
