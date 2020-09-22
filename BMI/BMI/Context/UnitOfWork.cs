@@ -12,6 +12,7 @@ namespace BMI.Context
         private readonly DataContext _db;
         private Repository<ClassifierType> _classifierType;
         private Repository<Classifier> _classifier;
+        private Repository<Estimate> _estimate;
 
         public UnitOfWork(DataContext db = null)
         {
@@ -20,6 +21,7 @@ namespace BMI.Context
 
         public Repository<ClassifierType> ClassifierTypes => _classifierType ?? (_classifierType = new Repository<ClassifierType>(_db));
         public Repository<Classifier> Classifiers => _classifier ?? (_classifier = new Repository<Classifier>(_db));
+        public Repository<Estimate> Estimate => _estimate ?? (_estimate = new Repository<Estimate>(_db));
 
         #region Dispose
         protected virtual void Dispose(bool disposing)
@@ -32,6 +34,7 @@ namespace BMI.Context
 
                 _classifierType?.Dispose();
                 _classifier?.Dispose();
+                _estimate?.Dispose();
             }
 
             _disposed = true;

@@ -140,6 +140,7 @@
     <Compile Include="Context\IRepository.cs" />
     <Compile Include="Context\Model\Classifier.cs" />
     <Compile Include="Context\Model\ClassifierType.cs" />
+    <Compile Include="Context\Model\Estimate.cs" />
     <Compile Include="Context\Repository.cs" />
     <Compile Include="Context\UnitOfWork.cs" />
     <Compile Include="Controllers\HomeController.cs" />

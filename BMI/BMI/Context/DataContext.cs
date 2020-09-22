@@ -42,5 +42,6 @@ namespace BMI.Context
 
         public DbSet<ClassifierType> ClassifierType { get; set; }
         public DbSet<Classifier> Classifiers { get; set; }
+        public DbSet<Estimate> Estimate { get; set; }
     }
 }
