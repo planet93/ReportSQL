@@ -172,34 +172,39 @@
             var d = $("#layoutSidenav_content");
             var r = $("#resize");
 
-            var curr_width = p.width()
+            var nav_width = p.width()
+            var overall_width = window.innerWidth;
             var unlock = false;
 
             $(document).mousemove(function (e) {
-                var change = curr_width + (e.clientX - curr_width);                               
+                var nav_change = nav_width + (e.clientX - nav_width);
+                var content_change = overall_width - nav_change;
+                console.log("SHIRINA VSYA: " + content_change);
 
                 if (unlock) {
 
-                    console.log("curr_width = " + curr_width);
+                    console.log("nav_width = " + nav_width);
                     console.log("e.clientX = " + e.clientX);
-                    console.log("change = " + change);
+                    console.log("change = " + nav_change);
 
-                    if (change > 199) {
+                    if (nav_change > 200) {
                         $("#debug").text(e.clientX + " resize");
                         
-                        p.css("width", change);
-                        //d.css("margin-left", change);
+                        p.css("width", nav_change);
+                        d.css("width", content_change);
+                        //d.css("margin-left", change - 200);
                     }
                     else {
                         console.log("123344")
                         p.css("width", 200);
-                        //d.css("margin-left", 200);
+                        d.css("width", overall_width);
+                        //d.css("margin-left", 0);
                     }
                 }
             });
 
             r.mousedown(function (e) {
-                curr_width = p.width();
+                nav_width = p.width();
                 unlock = true;
                 r.css("background-color", "rgba(0, 0, 0, 0.2)");
             });
