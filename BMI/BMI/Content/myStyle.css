@@ -7,7 +7,7 @@
     z-index: 1038;
     overflow-x: scroll;
     white-space: nowrap;
-    /*resize: horizontal;*/
+    resize: horizontal;
     overflow: auto;
 }
 #layoutSidenav_nav ul{
@@ -128,14 +128,4 @@
     height: 100%;
     content: "";
     background-color: #808080;
-}
-.resize-var1 {
-    left: 0px;
-    width: 5px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    cursor: col-resize;
-    display: flex;
-    float: left;
 }
