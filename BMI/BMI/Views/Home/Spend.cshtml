@@ -95,8 +95,9 @@
         </div>
 
         <div id="layoutSidenav_content" style="background-color:lightgrey">
+            <div id="resize" class="resize-var1"></div>
             <main>
-                <div class="container-fluid">
+                <div class="container-fluid">                    
                     <h1 class="mt-4">Dashboard</h1>
                 </div>
             </main>
@@ -166,6 +167,53 @@
         });
 
         
+        $(document).ready(function () {
+            var p = $("#layoutSidenav_nav");
+            var d = $("#layoutSidenav_content");
+            var r = $("#resize");
 
+            var curr_width = p.width()
+            var unlock = false;
+
+            $(document).mousemove(function (e) {
+                var change = curr_width + (e.clientX - curr_width);                               
+
+                if (unlock) {
+
+                    console.log("curr_width = " + curr_width);
+                    console.log("e.clientX = " + e.clientX);
+                    console.log("change = " + change);
+
+                    if (change > 199) {
+                        $("#debug").text(e.clientX + " resize");
+                        
+                        p.css("width", change);
+                        //d.css("margin-left", change);
+                    }
+                    else {
+                        console.log("123344")
+                        p.css("width", 200);
+                        //d.css("margin-left", 200);
+                    }
+                }
+            });
+
+            r.mousedown(function (e) {
+                curr_width = p.width();
+                unlock = true;
+                r.css("background-color", "rgba(0, 0, 0, 0.2)");
+            });
+
+            $(document).mousedown(function (e) {
+                if (unlock) {
+                    e.preventDefault();
+                }
+            });
+
+            $(document).mouseup(function (e) {
+                unlock = false;
+                r.css("background-color", "rgba(0, 0, 0, 0.1)");
+            });
+        });
     </script>
     }
