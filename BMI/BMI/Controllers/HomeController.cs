@@ -84,6 +84,9 @@ namespace BMI.Controllers
                     case "Spends":
                         result = mICs.CreateSpend(mICs.ParserClassifierType(savePath));
                         break;
+                    case "Spend4Level":
+                        result = mICs.CreateSpend4Level(mICs.ParserClassifierType(savePath));
+                        break;
                 }
                 System.IO.File.Delete(savePath);
 

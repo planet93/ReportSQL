@@ -12,5 +12,11 @@ namespace BMI.Models
         public string Description { get; set; }
         public string Parent { get; set; }
         public string Type { get; set; }
+
+        public string Spend1 { get; set; }
+        public string Spend2 { get; set; }
+        public string Spend3 { get; set; }
+        public string Spend4 { get; set; }
+
     }
 }

@@ -22,7 +22,8 @@ namespace BMI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/libs/axios.min.js",
-                      "~/Scripts/libs/vue.min.js"));
+                      "~/Scripts/libs/vue.min.js",
+                      "~/Content/js/bmi-script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

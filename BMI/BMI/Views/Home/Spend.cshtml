@@ -40,9 +40,9 @@
                 </li>
             </ul>*@
 
-            <ul>
+            <ul class="pl-1">
                 <li v-for="spend1 in spends">
-                    <div class="cursor-pointer spend1-title" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
+                    <div class="font-size-treeview cursor-pointer spend1-title" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
                         <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
                         <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
                         <div @@click="toggleSpend(spend1)" class="bold-title" @*v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}"*@>
@@ -51,8 +51,8 @@
                     </div>
 
                     <ul v-show="spend1.IsOpen" class="nested">
-                        <li v-for="spend2 in spend1.SubSpend">
-                            <div class="cursor-pointer spend2-title" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
+                        <li v-for="spend2 in spend1.SubSpend" class="pl-2">
+                            <div class="font-size-treeview cursor-pointer spend2-title" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
                                 <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
                                 <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
                                 <div @@click="toggleSpend(spend2)" style="font-weight:500">
@@ -61,21 +61,21 @@
                             </div>
 
                             <ul v-show="spend2.IsOpen" class="nested">
-                                <li v-for="spend3 in spend2.SubSpend">
-                                    <div class="title-spend">
+                                <li v-for="spend3 in spend2.SubSpend" class="pl-2">
+                                    <div class="font-size-treeview cursor-pointer spend3-title" v-bind:class="{'spend3-title-open':spend3.IsOpen}">
                                         <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
                                         <span v-show="spend3.IsOpen" class="material-icons my-icon">expand_more</span>
-                                        <div @@click="toggleSpend(spend3)" v-bind:class="{'li-bold':spend3.IsFolder, 'title-open':spend3.IsOpen}">
+                                        <div @@click="toggleSpend(spend3)">
                                             {{spend3.Name}}
                                         </div>
                                     </div>
 
                                     <ul v-show="spend3.IsOpen" class="nested">
-                                        <li v-for="spend4 in spend3.SubSpend">
-                                            <div class="title-spend">
-                                                <span v-show="!spend4.IsOpen" class="material-icons my-icon">chevron_right</span>
-                                                <span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>
-                                                <div @@click="toggleSpend(spend4)" v-bind:class="{'li-bold':spend4.IsFolder, 'title-open':spend4.IsOpen}">
+                                        <li v-for="spend4 in spend3.SubSpend" class="pl-2">
+                                            <div class="font-size-treeview cursor-pointer spend4-title" v-bind:class="{'spend4-title-open':spend4.IsOpen}">
+                                                <span @*v-show="!spend4.IsOpen"*@ class="material-icons my-icon">chevron_right</span>
+                                                @*<span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>*@
+                                                <div @@click="toggleSpend(spend4)">
                                                     {{spend4.Name}}
                                                 </div>
                                             </div>
@@ -110,67 +110,10 @@
 @section scripts{
     <script type="text/javascript">
 
-        var treeDataDef = [{
-            name: "Advertising",
-            children: [
-                {
-                    name: "Advertising Consumer",
-                    children: [
-                        {
-                            name: "Asset deployment",
-                            children: [{ name: "hello" }, { name: "wat" }]
-                        },
-                        { name: "Assets Creation" },
-                        { name: "Public Relations" },
-                        {
-                            name: "child folder",
-                            children: [{ name: "hello" }, { name: "wat" }]
-                        }
-                    ]
-                },
-                { name: "Advertising trade" },
-                {
-                    name: "SM Advertising trade",
-                    children: [
-                        {
-                            name: "child folder",
-                            children: [{ name: "hello" }, { name: "wat" }]
-                        },
-                        { name: "hello" },
-                        { name: "wat" },
-                        {
-                            name: "child folder",
-                            children: [{ name: "hello" }, { name: "wat" }]
-                        }
-                    ]
-                },
-            ],
-            isFolder: true,
-            isOpen: false,
-        },
-        {
-            name: "My Tree2",
-            children: [
-                {
-                    name: "hello spend",
-                    children: [
-                        { name: "spend3.1 asf asdasf" },
-                        { name: "spend3.2 assd sadas d" },
-                    ],
-                    isFolder: true,
-                    isOpen: false,
-                },
-                { name: "wat" }],
-            isFolder: true,
-            isOpen: false,
-        }
-        ];
-        
         var testApp = new Vue({
             el: "#globalSection",
             data: {
                 title: "Test",
-                treeData: treeDataDef,
                 boldClass: "li-bold",
                 openClass: "title-open",
 
@@ -179,10 +122,35 @@
             },
             methods: {
                 toggleSpend(item) {
+                    if (item.Level === 4) {
+                        this.removeSelect();
+                    }
                     item.IsOpen = !item.IsOpen;
-                    //if ( item.isFolder) {
-                    //    item.isOpen = !item.isOpen;
-                    //}
+                },
+                removeSelect() {
+                    for (let s1 = 0; s1 < this.spends.length; s1++) {
+
+                        var spends2 = this.spends[s1].SubSpend;
+                        if (spends2 != null) {
+                            for (let s2 = 0; s2 < spends2.length; s2++) {
+
+                                var spends3 = spends2[s2].SubSpend;
+                                if (spends3 != null) {
+                                    for (let s3 = 0; s3 < spends3.length; s3++) {
+
+                                        var spends4 = spends3[s3].SubSpend;
+                                        if (spends4 != null) {
+                                            for (let s4 = 0; s4 < spends4.length; s4++) {
+                                                spends4[s4].IsOpen = false;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+
+                            }
+                        }                     
+                    }
                 },
                 loadSpend() {
                     axios.post("/Home/GetSpends", null).then(resp => {
@@ -193,6 +161,7 @@
             },
             mounted() {
                 this.loadSpend();
+                loader.hide();
             }
         });
 

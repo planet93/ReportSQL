@@ -23,12 +23,13 @@
         var auditApp = new Vue({
             el: "#globalSection",
             data: {
-                typeLoad: ["ClassifierType", "Spends"],
+                typeLoad: ["ClassifierType", "Spends", "Spend4Level"],
 
                 selectdata: "",
             },
             methods: {
                 uploadSelectedFile() {
+                    loader.show();
                     var data = this.collectData("#file");
                     if (this.check()) {
                         axios.post("/Home/PostMasterData", data, { headers: { 'Content-Type': "multipart/form-data" } }).then(resp => {
@@ -42,6 +43,7 @@
                                     console.log(resp.data.LineError[i]);
                                 }
                             }
+                            loader.hide();
                         });
                     }
                 },
@@ -62,6 +64,7 @@
                 },
             },
             mounted() {
+                loader.hide();
             }
         });
 

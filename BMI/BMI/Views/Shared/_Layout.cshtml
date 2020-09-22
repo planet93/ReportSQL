@@ -46,7 +46,12 @@
                 <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
             </footer>
         </div>
-    </div>    
+    </div>
+
+    <div id="loader" class="loader">
+        <img alt="" src="~/Content/i/loader.svg" width="100" />
+        <h1 class="my-loader">Пожалуйста, подождите, идет загрузка</h1>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
