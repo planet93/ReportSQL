@@ -7,102 +7,168 @@
     <div id="layoutSidenav">
 
         <div id="layoutSidenav_nav" class="spend-first">
-            @*<ul>
-                <li v-for="item in treeData">
-                    <div class="title-spend">
-                        <span v-show="!item.isOpen" class="material-icons my-icon">chevron_right</span>
-                        <span v-show="item.isOpen" class="material-icons my-icon">expand_more</span>
-                        <div @@click="toggleSpend(item)" v-bind:class="{'li-bold':item.isFolder, 'title-open':item.isOpen}">
-                            {{item.name}}
-                        </div>
-                    </div>                    
-                    <ul v-show="item.isOpen" v-if="item.isFolder">
-                        <li v-for="item2 in item.children">
-                            <div class="title-spend">
-                                <span v-show="!item2.isOpen" class="material-icons my-icon">chevron_right</span>
-                                <span v-show="item2.isOpen" class="material-icons my-icon">expand_more</span>
-                                <div v-bind:class="[boldClass]"
-                                     @@click="toggleSpend(item2)">
-
-                                    {{item2.name}}
-                                </div>
-                            </div>
-                            <ul v-show="item2.isOpen" v-if="item2.isFolder">
-                                <li v-for="item3 in item2.children">
-                                    <div @@click="toggleSpend(item3)">
-                                        {{item3.name}}
-                                    </div>
-
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>*@
-
             <ul class="pl-1">
                 <li v-for="spend1 in spends">
-                    <div @@click="toggleSpend(spend1)" class="font-size-treeview cursor-pointer spend1-title mt-1" v-bind:class="{'spend1-title-open':spend1.IsOpen}" >
-                        <span v-show="!spend1.IsOpen" class="material-icons my-icon">chevron_right</span>
-                        <span v-show="spend1.IsOpen" class="material-icons my-icon">expand_more</span>
-                        <div class="bold-title" @*v-bind:class="{'li-bold':spend1.IsFolder, 'title-open':spend1.IsOpen}"*@>
+                    <div class="font-size-treeview cursor-pointer spend1-title mt-1" v-bind:class="{'spend1-title-open':spend1.IsOpen, 'spend-title-open':spend1.IsSelect}"  >
+                        <span v-show="!spend1.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend1)">chevron_right</span>
+                        <span v-show="spend1.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend1)">expand_more</span>
+                        <div class="bold-title" @@click="selectSpend(spend1)">
                             {{spend1.Name}}
                         </div>
                     </div>
 
                     <ul v-show="spend1.IsOpen" class="nested">
                         <li v-for="spend2 in spend1.SubSpend" class="pl-2">
-                            <div @@click="toggleSpend(spend2)" class="font-size-treeview cursor-pointer spend2-title mt-1" v-bind:class="{'spend2-title-open':spend2.IsOpen}">
-                                <span v-show="!spend2.IsOpen" class="material-icons my-icon">chevron_right</span>
-                                <span v-show="spend2.IsOpen" class="material-icons my-icon">expand_more</span>
-                                <div style="font-weight:500">
+                            <div class="font-size-treeview cursor-pointer spend2-title mt-1" v-bind:class="{'spend2-title-open':spend2.IsOpen, 'spend-title-open':spend2.IsSelect}">
+                                <span v-show="!spend2.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend2)">chevron_right</span>
+                                <span v-show="spend2.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend2)">expand_more</span>
+                                <div style="font-weight:500" @@click="selectSpend(spend2)">
                                     {{spend2.Name}}
                                 </div>
                             </div>
 
                             <ul v-show="spend2.IsOpen" class="nested">
                                 <li v-for="spend3 in spend2.SubSpend" class="pl-2">
-                                    <div @@click="toggleSpend(spend3)" class="font-size-treeview cursor-pointer spend3-title mt-1" v-bind:class="{'spend3-title-open':spend3.IsOpen}">
-                                        <span v-show="!spend3.IsOpen" class="material-icons my-icon">chevron_right</span>
-                                        <span v-show="spend3.IsOpen" class="material-icons my-icon">expand_more</span>
-                                        <div>
+                                    <div class="font-size-treeview cursor-pointer spend3-title mt-1" v-bind:class="{'spend3-title-open':spend3.IsOpen, 'spend-title-open':spend3.IsSelect}">
+                                        <span v-show="!spend3.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend3)">chevron_right</span>
+                                        <span v-show="spend3.IsOpen" class="material-icons my-icon" @@click="toggleSpend(spend3)">expand_more</span>
+                                        <div @@click="selectSpend(spend3)">
                                             {{spend3.Name}}
                                         </div>
                                     </div>
 
                                     <ul v-show="spend3.IsOpen" class="nested">
                                         <li v-for="spend4 in spend3.SubSpend" class="pl-2">
-                                            <div @@click="toggleSpend(spend4)" class="font-size-treeview cursor-pointer spend4-title mt-1" v-bind:class="{'spend4-title-open':spend4.IsOpen}">
-                                                <span @*v-show="!spend4.IsOpen"*@ class="material-icons my-icon">chevron_right</span>
-                                                @*<span v-show="spend4.IsOpen" class="material-icons my-icon">expand_more</span>*@
-                                                <div>
+                                            <div @@click="toggleSpend(spend4)" class="font-size-treeview cursor-pointer spend4-title mt-1" v-bind:class="{'spend4-title-open':spend4.IsOpen, 'spend-title-open':spend4.IsSelect}">
+                                                <span class="material-icons my-icon">chevron_right</span>
+                                                <div @@click="selectSpend(spend4)">
                                                     {{spend4.Name}}
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
-
                                 </li>
                             </ul>
-
                         </li>
-
                     </ul>
-
                 </li>
             </ul>
-
         </div>
 
-        <div id="layoutSidenav_content" style="background-color:lightgrey">
+        <div id="layoutSidenav_content">
             <div id="resize" class="resize-var1"></div>
-            <main>
-                <div class="container-fluid">                    
-                    <h1 class="mt-4">Dashboard</h1>
+            <div class="estimate-month" v-if="spendList.length === undefined">
+                <div class="col-12 mt-2 mb-2" v-show="selectedSpend.Level === 4">
+                    <button type="button" class="btn btn-sm btn-success" @@click="openAddModal">Добавить Activity</button>
                 </div>
-            </main>
+                <table class="estimate-table">
+                    <thead>
+                        <tr class="estimate-header-row">
+                            <th v-show="selectedSpend.Level === 4">#</th>
+                            <th>Activity/Spend</th>
+                            <template v-for="header in spendList.Header">
+                                <th>{{header.Name}} Act</th>
+                                <th>{{header.Name}} Plan</th>
+                                <th>{{header.Name}} Deviation</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="res in spendList.ResultList">
+                            <td class="text-center" v-show="selectedSpend.Level === 4">
+                                <button type="button" class="btn btn-sm btn-outline-info" @@click="openEditModal(res)">
+                                    <span class="material-icons" style="font-size:small">edit</span>
+                                </button>
+                            </td>
+                            <td class="text-center">{{res.Name}}</td>
+                            <template v-for="item in res.MonthSum">
+                                <td class="text-center">{{item.EstimSum}}</td>
+                                <td class="text-center">{{item.TargetSum}}</td>
+                                <td class="text-center">{{item.Deviation}}</td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-info" style="display:flex; justify-content:center; margin-top:15px" v-if="spendList.length === 0">Data empty. Not select Activity/Spend.</div>
         </div>
+    </div>
+</div>
 
+<div class="modal fade bd-example-modal-lg" id="editActivity" tabindex="-1" role="dialog" aria-labelledby="editActivityModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
+            </div>
+            <div class="modal-body" style="overflow-y:auto;">
+                <table class="estimate-table">
+                    <thead>
+                        <tr class="estimate-header-row">
+                            <th>Activity name</th>
+                            <template v-for="header in spendList.Header">
+                                <th>{{header.Name}} Act</th>
+                                <th>{{header.Name}} Plan</th>
+                                <th>{{header.Name}} Deviation</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" style="width: 12vh;"><input type="text" class="form-control form-control-sm" v-model="editActivity.Name" /></td>
+                            <template v-for="item in editActivity.MonthSum">
+                                <td class="text-center">{{item.EstimSum}}</td>
+                                <td class="text-center" v-if="!item.AllowEdit">{{item.TargetSum}}</td>
+                                <td class="text-center" v-else><input type="number" class="form-control form-control-sm" @@change="calculateDev(item)" v-model="item.TargetSum" /></td>
+                                <td class="text-center">{{item.Deviation.toFixed(2)}}</td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @@click="closeEditModal">Закрыть</button>
+                <button type="button" class="btn btn-primary" @@click="updateActivity">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="addNewActivity" tabindex="-1" role="dialog" aria-labelledby="addNewActivityModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
+            </div>
+            <div class="modal-body" style="overflow-y:auto;">
+                <table class="estimate-table">
+                    <thead>
+                        <tr class="estimate-header-row">
+                            <th>Activity name</th>
+                            <template v-for="header in spendList.Header">
+                                <th>{{header.Name}} Act</th>
+                                <th>{{header.Name}} Plan</th>
+                                <th>{{header.Name}} Deviation</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" style="width: 12vh;"><input type="text" class="form-control form-control-sm" v-model="newActivity.Name" /></td>
+                            <template v-for="item in newActivity.MonthSum">
+                                <td class="text-center"><input type="number" class="form-control form-control-sm" @@change="calculateDev(item)" v-model="item.EstimSum" /></td>
+                                <td class="text-center"><input type="number" class="form-control form-control-sm" @@change="calculateDev(item)" v-model="item.TargetSum" /></td>
+                                <td class="text-center">{{item.Deviation.toFixed(2)}}</td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @@click="closeAddModal">Закрыть</button>
+                <button type="button" class="btn btn-success" @@click="addNewActivity">Созранить новую активность</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -111,54 +177,165 @@
 @section scripts{
     <script type="text/javascript">
 
-        var testApp = new Vue({
+        let defEditActivity = {
+            Name: "",
+            MonthSum: [],
+        }
+
+        let defNewActivity = {
+            Name: "",
+            MonthSum: [
+                { Id: 0, EstimSum: 0, TargetSum: 0, Deviation: 0, },
+            ],
+        }
+
+        let testApp = new Vue({
             el: "#globalSection",
             data: {
                 title: "Test",
                 boldClass: "li-bold",
                 openClass: "title-open",
+                selectedSpend: 0,
 
                 spends: [],
+                spendList: [],
 
+                editActivity: defEditActivity,
+                newActivity: defNewActivity,
             },
             methods: {
                 toggleSpend(item) {
-                    if (item.Level === 4) {
-                        this.removeSelect();
-                    }
                     item.IsOpen = !item.IsOpen;
+                },
+                selectSpend(item) {
+                    this.removeSelect();
+                    this.selectedSpend = item;
+                    this.$nextTick(function () {
+                        item.IsSelect = true;
+
+                        console.log(item)
+
+                        this.loadSpendSum();
+                    })
                 },
                 removeSelect() {
                     for (let s1 = 0; s1 < this.spends.length; s1++) {
+                        this.spends[s1].IsSelect = false;
 
                         var spends2 = this.spends[s1].SubSpend;
                         if (spends2 != null) {
                             for (let s2 = 0; s2 < spends2.length; s2++) {
+                                spends2[s2].IsSelect = false;
 
                                 var spends3 = spends2[s2].SubSpend;
                                 if (spends3 != null) {
                                     for (let s3 = 0; s3 < spends3.length; s3++) {
+                                        spends3[s3].IsSelect = false;
 
                                         var spends4 = spends3[s3].SubSpend;
                                         if (spends4 != null) {
                                             for (let s4 = 0; s4 < spends4.length; s4++) {
-                                                spends4[s4].IsOpen = false;
+                                                spends4[s4].IsSelect = false;
                                             }
                                         }
                                     }
-                                    
                                 }
-
                             }
                         }                     
                     }
+                },
+                loadSpendSum() {
+                    loader.show();
+                    axios.post("/Home/GetEstimSum", { Level: this.selectedSpend.Level, SpendId: this.selectedSpend.Id }).then(resp => {
+                        console.log(resp.data);
+                        this.spendList = resp.data;
+                        loader.hide();
+                    });
                 },
                 loadSpend() {
                     axios.post("/Home/GetSpends", null).then(resp => {
                         console.log(resp.data);
                         this.spends = resp.data;
                     });
-                }
+                },
+                calculateDev(item) {
+                    item.Deviation = item.EstimSum - item.TargetSum;
+                },
+                openEditModal(item) {
+                    this.editActivity.Name = item.Name;
+                    this.editActivity.MonthSum = item.MonthSum.map(function (x) {
+                        let temp = {
+                            Id: x.Id,
+                            AllowEdit: x.AllowEdit,
+                            MonthId: x.MonthId,
+                            EstimSum: x.EstimSum,
+                            TargetSum: x.TargetSum,
+                            Deviation: x.Deviation,
+                        }
+                        return temp;
+                    });
+                    $('#editActivity').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true,
+                    });
+
+                },
+                updateActivity() {
+                    loader.show();
+                    axios.post("/Home/UpdateActivity", { data: JSON.stringify(this.editActivity), SpendId: this.selectedSpend.Id }).then(resp => {
+                        if (resp.data.Error) {
+                            alert(resp.data.ErrorMessage);
+                        }
+                        else {
+                            this.loadSpendSum(this.selectedSpend);
+                            $('#editActivity').modal('hide');
+                        }
+                        loader.hide();
+                    });
+                },
+                closeEditModal() {
+                    result = confirm('Все введенные данные будут стерты. Вы уверены, что хотите закрыть данное окно?');
+                    if (result) {
+                        $('#editActivity').modal('hide');
+                    }
+                },
+                openAddModal() {
+                    this.newActivity.MonthSum = this.spendList.Header.map(function (x) {
+                        let Obj = {
+                            Id: 0,
+                            MonthId: x.MonthId,
+                            EstimSum: 0,
+                            TargetSum: 0,
+                            Deviation: 0,
+                        }
+                        return Obj;
+                    })
+                    $('#addNewActivity').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true,
+                    });
+                },
+                addNewActivity() {
+                    loader.show();
+                    axios.post("/Home/AddNewActivity", { data: JSON.stringify(this.newActivity), SpendId: this.selectedSpend.Id }).then(resp => {
+                        if (resp.data.Error) {
+                            alert(resp.data.ErrorMessage);
+                        }
+                        else {
+                            this.loadSpendSum(this.selectedSpend);
+                            $('#addNewActivity').modal('hide');
+                        }
+                        loader.hide();
+                    });
+                },
+                closeAddModal() {
+                    result = confirm('Все введенные данные будут стерты. Вы уверены, что хотите закрыть данное окно?');
+                    if (result) {
+                        $('#addNewActivity').modal('hide');
+                    }
+                },
             },
             mounted() {
                 this.loadSpend();
@@ -188,7 +365,7 @@
                     }
                     else {
                         p.css("width", 200);
-                        d.css("width", overall_width);
+                        d.css("width", '100%');
                     }
                 }
             });

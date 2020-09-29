@@ -1,6 +1,7 @@
 ﻿using BMI.Models;
 using BMI.Services;
 using BMI.Services.Util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +89,9 @@ namespace BMI.Controllers
                     case "Spend4Level":
                         result = mICs.CreateSpend4Level(mICs.ParserClassifierType(savePath));
                         break;
+                    case "Activities":
+                        result = mICs.LoadActivities(mICs.ParserClassifierType(savePath));
+                        break;
                 }
                 System.IO.File.Delete(savePath);
 
@@ -96,6 +100,22 @@ namespace BMI.Controllers
 
             return Json("ok");
         }
-
+        public JsonResult GetEstimSum(long Level, long SpendId)
+        {
+            var res = mSs.GetEstimSum(Level, SpendId);
+            return Json(res);
+        }
+        public JsonResult UpdateActivity(string data, long SpendId)
+        {
+            var model = JsonConvert.DeserializeObject<EstimateViewModel>(data);
+            var res = mSs.UpdateActivity(model, SpendId);
+            return Json(res);
+        }
+        public JsonResult AddNewActivity(string data, long SpendId)
+        {
+            var model = JsonConvert.DeserializeObject<EstimateViewModel>(data);
+            var res = mSs.AddNewActivity(model, SpendId);
+            return Json(res);
+        }
     }
 }

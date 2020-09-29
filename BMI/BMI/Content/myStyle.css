@@ -11,6 +11,17 @@
     /*resize: horizontal;*/
     overflow: auto;
 }
+#layoutSidenav_nav::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+#layoutSidenav_nav::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+    margin: 0.5rem 2rem 0.5rem 2rem;
+}
 #layoutSidenav_nav ul{
     position: relative;
     padding-left: 1em;
@@ -21,8 +32,9 @@
     list-style-type: none;
 }
 #layoutSidenav_content {
-    background-color: lightgrey;
-    width:100%;
+    /*background-color: lightgrey;*/
+    width: 100%;
+    overflow-x: auto;
 }
 .title-spend {
     padding: .2em .2em .2em .4em;
@@ -40,7 +52,8 @@
     padding: .2em .2em .2em .4em;
 }
 .spend1-title:hover {
-    background-color: #2c81cc;
+    background-color: #fff682;
+    color: black;
     border-top-left-radius: .3em;
     border-bottom-left-radius: .3em;
     transition: 0.5s;
@@ -56,7 +69,8 @@
     padding: .2em .2em .2em .4em;
 }
 .spend2-title:hover {
-    background-color: #769dd8;
+    background-color: #fff682;
+    color: black;
     border-top-left-radius: .3em;
     border-bottom-left-radius: .3em;
     transition: 0.5s;
@@ -72,7 +86,8 @@
     padding: .2em .2em .2em .4em;
 }
 .spend3-title:hover {
-    background-color: #b3dcff;
+    background-color: #fff682;
+    color: black;
     border-top-left-radius: .3em;
     border-bottom-left-radius: .3em;
     transition: 0.5s;
@@ -88,13 +103,13 @@
     padding: .2em .2em .2em .4em;
 }
 .spend4-title:hover {
-    background-color: #fffab9;
+    background-color: #fff682;
     border-top-left-radius: .3em;
     border-bottom-left-radius: .3em;
     transition: 0.5s;
     padding: .2em .2em .2em .4em;
 }
-.spend4-title-open {
+.spend-title-open {
     background-color: #fffab9;
     color: #29333e;
     border-top-left-radius: .3em;
@@ -140,4 +155,51 @@
     cursor: col-resize;
     display: flex;
     float: left;
+}
+.estimate-month {
+    margin: 0 auto;
+    height: 80vh;
+    overflow-y: auto;
+}
+.estimate-month::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+.estimate-month::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+    margin: 0.5rem 2rem 0.5rem 2rem;
+}
+.estimate-month table tbody td {
+    font-size: x-small;
+}
+.estimate-table {
+    position: relative;
+    border-collapse: collapse;
+}
+.estimate-table th {
+    padding: 1rem;
+}
+.estimate-table .estimate-header-row th {
+    color: black;
+    background: white;
+    position: sticky;
+    background-color: #f5f5f5;
+    top: 0;
+    font-size: x-small;
+    z-index: 91;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 1);
+    min-width: 100px;
+    text-align:center;
+}
+table.estimate-table tbody tr td {
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #dee2e6;
+}
+table.estimate-table tbody tr:nth-child(2n+1) {
+    background-color: #fbf7f7;
+}
+.modal-open .modal {
+    overflow-y: hidden;
 }

@@ -12,9 +12,10 @@ namespace BMI.Models
 
         public List<Spend> SubSpend { get; set; }
         public bool IsOpen { get; set; }
-        public bool IsFolder { get; set; }
-        public string ColorClass { get; set; }
+        //public bool IsFolder { get; set; }
+        //public string ColorClass { get; set; }
         public int Level { get; set; }
+        public bool IsSelect { get; set; }
     }
 
     public class SpendDDM
